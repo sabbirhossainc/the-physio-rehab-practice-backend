@@ -2,7 +2,8 @@ const express = require('express');
 const serverless = require('serverless-http');
 const app = express();
 const router = express.Router();
-const testData = require('../db/v1.json');
+const physioblogs = require('../db/physioblogs.json');
+const faqs = require('../db/faqs.json');
 
 let records = [];
 
@@ -26,10 +27,16 @@ router.get('/', (req, res) => {
 //   res.send('Updating existing record');
 // });
 
-//showing demo records
-router.get('/v1', (req, res) => {
-  res.json(testData);
+//showing physioblogs records
+router.get('/physioblogs', (req, res) => {
+  res.json(physioblogs);
 });
+
+//showing faqs records
+router.get('/faqs', (req, res) => {
+  res.json(faqs);
+});
+
 
 app.use('/.netlify/functions/api', router);
 module.exports.handler = serverless(app);
